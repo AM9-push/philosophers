@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/aachalla/Desktop/42cursus/philosophers/philosophers/philosophers/philo_bonus",
+      "program": "/Users/aachalla/Desktop/42cursus/philosophers/philosophers/philosophers/philo_bonus/build/Debug/outDebug"
+    }
+  ]
+}
