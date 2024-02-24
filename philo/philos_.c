@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:17:49 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 03:26:08 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/24 23:17:24 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	*philos_simult(void *philo)
 	while (!let_is_check_for_dead(p_ilo->data)
 		&& p_ilo->data->philo_nbr_eat)
 	{
-		let_is_think_and_fork(p_ilo);
+		if (let_is_think_and_fork(p_ilo))
+			break ;
 		let_is_eat(p_ilo);
 		if (p_ilo->data->philo_nbr_eat == p_ilo->count_eat)
 			return (NULL);

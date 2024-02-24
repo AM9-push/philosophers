@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:05:16 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 03:38:45 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/24 23:13:56 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	philos_print(t_philo *philo, int arg, char *color, char *str);
 void	philos_create(t_data *data);
 void	*philos_simult(void *philo);
 void	*check_is_there_dead(void *d_ta);
+int		let_is_think_and_fork(t_philo *philo);
 int		let_is_check_for_dead(t_data *data);
 void	let_is_finish_him(t_philo *philo);
-void	let_is_think_and_fork(t_philo *philo);
 void	let_is_eat(t_philo *philo);
 void	let_is_sleep(t_philo *philo);
 void	destroy_mutex(t_data *data);
