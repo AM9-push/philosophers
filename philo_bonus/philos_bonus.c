@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:17:49 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 16:50:33 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:19:45 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ void	philos_print(t_philo *philo, int arg, char *color, char *str)
 	sem_post(philo->data->sem_mssg);
 }
 
+void	philos_last_and_count_eat(t_philo *philo)
+{
+	sem_wait(philo->data->sem_count_eat);
+	philo->count_eat += (philo->count_eat != -2);
+	sem_post(philo->data->sem_count_eat);
+	sem_wait(philo->data->sem_count_eat);
+	philo->last_eat = get_current_time();
+	sem_post(philo->data->sem_count_eat);
+}
+
 void	philos_simult(t_philo *philo)
 {
 	pthread_create(&philo->philo_thd, NULL, check_is_there_dead, philo);
@@ -43,12 +53,7 @@ void	philos_simult(t_philo *philo)
 		sem_wait(philo->data->sem_fork);
 		philos_print(philo, philo->philo_indice, "\e[93m", "has taken a fork");
 		philos_print(philo, philo->philo_indice, "\e[92m", "is eating");
-		sem_wait(philo->data->sem_count_eat);
-		philo->count_eat += (philo->count_eat != -2);
-		sem_post(philo->data->sem_count_eat);
-		sem_wait(philo->data->sem_count_eat);
-		philo->last_eat = get_current_time();
-		sem_post(philo->data->sem_count_eat);
+		philos_last_and_count_eat(philo);
 		philos_usleep(philo->data->philo_eat);
 		sem_post(philo->data->sem_fork);
 		sem_post(philo->data->sem_fork);

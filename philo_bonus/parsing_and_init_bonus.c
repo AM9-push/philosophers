@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:42:52 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 16:49:40 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:17:46 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	parsing_input(int ac, char *av[])
 	int	i_dice_2;
 	int	ac_dice;
 
-	ac_dice = 0;    
+	ac_dice = 0;
 	if (ac < 5 || ac > 6)
 		return (0);
 	while (++ac_dice < ac)
 	{
 		i_dice_1 = 0;
 		i_dice_2 = 0;
-		if (av[ac_dice][i_dice_1] == '+') 
+		if (av[ac_dice][i_dice_1] == '+')
 			i_dice_1 = ++i_dice_2;
 		while (av[ac_dice][i_dice_1])
 		{
