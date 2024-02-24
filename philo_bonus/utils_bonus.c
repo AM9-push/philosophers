@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 21:21:36 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 17:15:01 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/24 21:47:31 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	*check_is_there_dead(void *data)
 	p_ilo = (t_philo *)data;
 	while (4)
 	{
+		usleep(100);
 		sem_wait(p_ilo->data->sem_count_eat);
 		sem_wait(p_ilo->data->sem_last_eat);
 		if (p_ilo->count_eat < p_ilo->data->philo_nbr_eat
