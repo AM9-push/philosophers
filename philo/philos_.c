@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:17:49 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/25 16:00:53 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:24:55 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	philos_usleep(int time_eat_sleep)
 
 	start_time = get_current_time();
 	while ((get_current_time() - start_time) < time_eat_sleep)
-		usleep(100);
+		usleep(500);
 }
 
 void	philos_print(t_philo *philo, int arg, char *color, char *str)
@@ -58,11 +58,12 @@ void	*philos_simult(void *philo)
 	p_ilo->last_eat = get_current_time();
 	pthread_mutex_unlock(&p_ilo->data->mutex_eat);
 	if (!(p_ilo->philo_indice % 2))
-		philos_usleep(1);
+		philos_usleep(p_ilo->data->philo_eat / 2);
 	while (!let_is_check_for_dead(p_ilo->data)
 		&& p_ilo->data->philo_nbr_eat)
 	{
-		let_is_think_and_fork(p_ilo);
+		if (let_is_think_and_fork(p_ilo))
+			break;
 		let_is_eat(p_ilo);
 		if (p_ilo->data->philo_nbr_eat == p_ilo->count_eat)
 			return (NULL);
