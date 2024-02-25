@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 21:21:36 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/25 18:01:42 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 22:00:01 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ void	unlink_and_close_semaphores(t_data *data)
 	sem_close(data->sem_count_eat);
 }
 
-void	kill_the_childs(t_philo *philo)
+void	kill_the_childs(t_data *data)
 {
 	int	i_dice;
 
 	i_dice = -1;
-	while (++i_dice < philo->data->philo_nbr)
-		if (i_dice + 1 != philo->philo_indice)
-			kill(philo->data->process_pid[i_dice - 1], SIGINT);
+	while (++i_dice < data->philo_nbr)
+		kill(data->process_pid[i_dice], SIGINT);
 }
 
 void	*check_is_there_dead(void *data)
@@ -72,7 +71,6 @@ void	*check_is_there_dead(void *data)
 	p_ilo = (t_philo *)data;
 	while (4)
 	{
-		usleep(100);
 		sem_wait(p_ilo->data->sem_count_eat);
 		sem_wait(p_ilo->data->sem_last_eat);
 		if (p_ilo->count_eat < p_ilo->data->philo_nbr_eat
@@ -82,13 +80,13 @@ void	*check_is_there_dead(void *data)
 			printf("\e[1m\e[31m%ld %d died\n\e[0m",
 				get_current_time() - p_ilo->data->start_simlt,
 				p_ilo->philo_indice);
-			kill_the_childs(p_ilo);
 			sem_post(p_ilo->data->sem_last_eat);
 			sem_post(p_ilo->data->sem_count_eat);
-			return (unlink_and_close_semaphores(p_ilo->data), exit(0), NULL);
+			exit(1);
 		}
 		sem_post(p_ilo->data->sem_last_eat);
 		sem_post(p_ilo->data->sem_count_eat);
+		usleep(p_ilo->data->philo_eat * 2);
 	}
 	return (NULL);
 }

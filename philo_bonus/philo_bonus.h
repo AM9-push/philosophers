@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 22:11:22 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 16:48:15 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 21:33:04 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ int		init_philos(t_data *data, int ac);
 int		get_current_time(void);
 void	*check_is_there_dead(void *data);
 void	philos_create(t_data *data);
+void	kill_the_childs(t_data *data);
+void	unlink_and_close_semaphores(t_data *data);
 
 #endif

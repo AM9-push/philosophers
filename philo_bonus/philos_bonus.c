@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:17:49 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/25 18:21:01 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 22:03:34 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,16 @@ void	philos_last_and_count_eat(t_philo *philo)
 	sem_wait(philo->data->sem_count_eat);
 	philo->count_eat += (philo->count_eat != -2);
 	sem_post(philo->data->sem_count_eat);
-	sem_wait(philo->data->sem_count_eat);
+	sem_wait(philo->data->sem_last_eat);
 	philo->last_eat = get_current_time();
-	sem_post(philo->data->sem_count_eat);
+	sem_post(philo->data->sem_last_eat);
 }
 
 void	philos_simult(t_philo *philo)
 {
 	pthread_create(&philo->philo_thd, NULL, check_is_there_dead, philo);
-	pthread_detach(philo->philo_thd);
+	if (!(philo->philo_indice % 2))
+		philos_usleep(philo->data->philo_eat / 2);
 	while (philo->data->philo_nbr_eat)
 	{
 		sem_wait(philo->data->sem_fork);
@@ -62,12 +63,14 @@ void	philos_simult(t_philo *philo)
 		philos_usleep(philo->data->philo_sleep);
 		philos_print(philo, philo->philo_indice, "\e[96m", "is thinking");
 	}
+	pthread_join(philo->philo_thd, NULL);
 	exit(0);
 }
 
 void	philos_create(t_data *data)
 {
 	int	i_dice;
+	int	status;
 
 	data->start_simlt = get_current_time();
 	i_dice = -1;
@@ -76,8 +79,14 @@ void	philos_create(t_data *data)
 		data->process_pid[i_dice] = fork();
 		if (!data->process_pid[i_dice])
 			philos_simult(&data->philo_data[i_dice]);
+		usleep(100);
 	}
 	i_dice = -1;
 	while (++i_dice < data->philo_nbr)
-		waitpid(-1, 0, 0);
+	{
+		waitpid(-1, &status, 0);
+		if (status)
+			kill_the_childs(data);
+	}
+	unlink_and_close_semaphores(data);
 }
