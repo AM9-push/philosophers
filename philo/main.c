@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:05:31 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/25 16:40:18 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 18:04:58 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	init_philos(t_data *data, int ac)
 			data->philo_data[i_dice].right_fork = &data->m_tex[0];
 		else
 			data->philo_data[i_dice].right_fork = &data->m_tex[i_dice + 1];
-		data->start_simlt = get_current_time();
-		if (!data->start_simlt)
+		data->philo_data[i_dice].last_eat = get_current_time();
+		if (!data->philo_data[i_dice].last_eat)
 			return (0);
 		data->philo_data[i_dice].philo_indice = i_dice + 1;
 		data->philo_data[i_dice].count_eat = -2 * !(ac == 6);

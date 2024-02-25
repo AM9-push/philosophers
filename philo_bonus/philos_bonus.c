@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:17:49 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 21:46:04 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 18:21:01 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	philos_simult(t_philo *philo)
 	pthread_detach(philo->philo_thd);
 	while (philo->data->philo_nbr_eat)
 	{
-		philos_print(philo, philo->philo_indice, "\e[96m", "is thinking");
 		sem_wait(philo->data->sem_fork);
 		philos_print(philo, philo->philo_indice, "\e[93m", "has taken a fork");
 		if (philo->data->philo_nbr == 1)
@@ -61,6 +60,7 @@ void	philos_simult(t_philo *philo)
 			exit(0);
 		philos_print(philo, philo->philo_indice, "\e[90m", "is sleeping");
 		philos_usleep(philo->data->philo_sleep);
+		philos_print(philo, philo->philo_indice, "\e[96m", "is thinking");
 	}
 	exit(0);
 }

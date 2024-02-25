@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:17:49 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/25 16:40:29 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 18:09:49 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ void	philos_print(t_philo *philo, int arg, char *color, char *str)
 {
 	pthread_mutex_lock(&philo->data->mutex_print_mssg);
 	if (!philo->data->print_mssg)
-	{
 		printf("\e[1m%s%d %d %s\n\e[0m",
 			color, get_current_time() - philo->data->start_simlt, arg, str);
-	}
 	pthread_mutex_unlock(&philo->data->mutex_print_mssg);
 }
 
@@ -55,20 +53,17 @@ void	*philos_simult(void *philo)
 	t_philo	*p_ilo;
 
 	p_ilo = (t_philo *)philo;
-	pthread_mutex_lock(&p_ilo->data->mutex_eat);
-	p_ilo->last_eat = get_current_time();
-	pthread_mutex_unlock(&p_ilo->data->mutex_eat);
 	if (!(p_ilo->philo_indice % 2))
 		philos_usleep(p_ilo->data->philo_eat / 2);
 	while (!let_is_check_for_dead(p_ilo->data)
 		&& p_ilo->data->philo_nbr_eat)
 	{
-		if (let_is_think_and_fork(p_ilo))
+		if (let_is_fork(p_ilo))
 			break ;
 		let_is_eat(p_ilo);
 		if (p_ilo->data->philo_nbr_eat == p_ilo->count_eat)
 			return (NULL);
-		let_is_sleep(p_ilo);
+		let_is_sleep_and_think(p_ilo);
 	}
 	return (NULL);
 }

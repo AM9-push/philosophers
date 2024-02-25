@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:42:52 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/25 16:39:11 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 18:09:33 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int	let_is_check_for_dead(t_data *data)
 	return (pthread_mutex_unlock(&data->mutex_dead), 1);
 }
 
-int	let_is_think_and_fork(t_philo *philo)
+int	let_is_fork(t_philo *philo)
 {
-	philos_print(philo, philo->philo_indice, "\e[96m", "is thinking");
 	pthread_mutex_lock(philo->right_fork);
 	philos_print(philo, philo->philo_indice, "\e[93m", "has taken a fork");
 	if (philo->data->philo_nbr == 1)
@@ -46,10 +45,11 @@ void	let_is_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 }
 
-void	let_is_sleep(t_philo *philo)
+void	let_is_sleep_and_think(t_philo *philo)
 {
 	philos_print(philo, philo->philo_indice, "\e[90m", "is sleeping");
 	philos_usleep(philo->data->philo_sleep);
+	philos_print(philo, philo->philo_indice, "\e[96m", "is thinking");
 }
 
 void	let_is_finish_him(t_philo *philo)
