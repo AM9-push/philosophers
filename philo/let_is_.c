@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:42:52 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/25 16:00:57 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:39:11 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	let_is_think_and_fork(t_philo *philo)
 	pthread_mutex_lock(philo->right_fork);
 	philos_print(philo, philo->philo_indice, "\e[93m", "has taken a fork");
 	if (philo->data->philo_nbr == 1)
-		return (1);
+		return (pthread_mutex_unlock(philo->right_fork), 1);
 	pthread_mutex_lock(philo->left_fork);
 	philos_print(philo, philo->philo_indice, "\e[93m", "has taken a fork");
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 20:17:49 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/25 16:29:02 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:40:29 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	philos_create(t_data *data)
 	i_dice = -1;
 	while (++i_dice < data->philo_nbr)
 		pthread_join(data->philo_thd[i_dice], NULL);
+	destroy_mutex(data);
 }
 
 void	*philos_simult(void *philo)
