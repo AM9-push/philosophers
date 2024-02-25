@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 21:21:36 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 23:15:40 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:00:55 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	destroy_mutex(t_data *data)
 	pthread_mutex_destroy(&data->mutex_fork);
 	pthread_mutex_destroy(&data->mutex_eat);
 	pthread_mutex_destroy(&data->mutex_dead);
-	pthread_mutex_destroy(&data->mutex_bye);
+	pthread_mutex_destroy(&data->mutex_print_mssg);
 	pthread_mutex_destroy(&data->mutex_count_eat);
 }
 

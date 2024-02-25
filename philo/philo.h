@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:05:16 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 23:13:56 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:00:43 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_data
 	int				philo_nbr_eat;
 	int				start_simlt;
 	int				i_m_dead;
-	int				bye;
+	int				print_mssg;
 	t_philo			philo_data[200];
 	pthread_t		philo_thd[200];	
 	pthread_t		philo_monitor;	
@@ -48,7 +48,7 @@ typedef struct s_data
 	pthread_mutex_t	mutex_eat;
 	pthread_mutex_t	mutex_dead;
 	pthread_mutex_t	mutex_count_eat;
-	pthread_mutex_t	mutex_bye;
+	pthread_mutex_t	mutex_print_mssg;
 }				t_data;
 
 int		ft_atoi(const char *str);

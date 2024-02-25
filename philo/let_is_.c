@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:42:52 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 23:13:32 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:00:57 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	let_is_finish_him(t_philo *philo)
 	pthread_mutex_lock(&philo->data->mutex_dead);
 	philo->data->i_m_dead = 1;
 	pthread_mutex_unlock(&philo->data->mutex_dead);
-	pthread_mutex_lock(&philo->data->mutex_bye);
-	philo->data->bye = 1;
-	pthread_mutex_unlock(&philo->data->mutex_bye);
+	pthread_mutex_lock(&philo->data->mutex_print_mssg);
+	philo->data->print_mssg = 1;
+	pthread_mutex_unlock(&philo->data->mutex_print_mssg);
 	printf("\e[1m\e[31m%d %d died\n\e[0m", get_current_time()
 		- philo->data->start_simlt,
 		philo->philo_indice);

@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:05:31 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/24 03:38:33 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:00:59 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	init_data(t_data *data, int ac, char *av[])
 	else
 		data->philo_nbr_eat = -1;
 	data->i_m_dead = 0;
-	data->bye = 0;
+	data->print_mssg = 0;
 	return (1);
 }
 
@@ -82,7 +82,7 @@ int	init_mutex(t_data *data)
 		return (0);
 	if (pthread_mutex_init(&data->mutex_count_eat, NULL))
 		return (0);
-	if (pthread_mutex_init(&data->mutex_bye, NULL))
+	if (pthread_mutex_init(&data->mutex_print_mssg, NULL))
 		return (0);
 	return (1);
 }
