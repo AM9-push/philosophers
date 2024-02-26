@@ -6,7 +6,7 @@
 /*   By: aachalla <aachalla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 18:05:31 by aachalla          #+#    #+#             */
-/*   Updated: 2024/02/25 18:04:58 by aachalla         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:15:52 by aachalla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(int ac, char *av[])
 	t_data	data;
 
 	if (parsing_input(ac, av) && init_data(&data, ac, av)
-		&& init_mutex(&data) && init_philos(&data, ac))
+		&& init_philos(&data, ac) && init_mutex(&data))
 		philos_create(&data);
 	else
 		return (write(2, "\e[1m\e[91mINPUT ERROR\n\e[0m", 21), 1);
